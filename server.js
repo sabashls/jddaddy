@@ -7,7 +7,7 @@ dotenv.config();
 
 async function startServer() {
   const app = express();
-  const PORT = 8080;
+  const PORT = 5200;
 
   app.use(morgan('dev'));
   app.use(cors());
