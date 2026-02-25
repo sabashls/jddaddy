@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // GraphQL →  API endpoint
@@ -19,4 +19,4 @@ router.post("/add", express.json(), (req, res) => {
   res.json({ success: true });
 });
 
-module.exports = router;
+export default  router;

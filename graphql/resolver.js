@@ -1,4 +1,5 @@
-const User = require("../models/user");
+// const User = require("../models/user");
+import User from "../models/user.js";
 
 const resolvers = {
   Query: {
@@ -23,4 +24,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;

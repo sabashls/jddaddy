@@ -1,11 +1,11 @@
 // GraphQL setup using Apollo Server and Express
 
-const { ApolloServer } = require("apollo-server-express");
-const typeDefs = require("./schema");
-const resolvers = require("./resolver");
-const connectDB = require("../lib/db");
+import { ApolloServer } from "apollo-server-express";
+import typeDefs from "./schema.js";
+import resolvers from "./resolver.js";
+import connectDB from "../lib/db.js";
 
-async function startGraphQL(app) {
+export default async function  startGraphQL(app) {
   // Connect Database
   await connectDB();
 
@@ -26,4 +26,3 @@ async function startGraphQL(app) {
   console.log("✅ GraphQL initialized");
 }
 
-module.exports = startGraphQL;

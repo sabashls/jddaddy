@@ -1,7 +1,10 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const morgan = require('morgan');
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import morgan from 'morgan';
+import indexRoutes from './routes/index.js';
+import exerciseRoutes from './routes/exceiseURLRoute.js';
+import startGraphQL from './graphql/index.js';
 
 dotenv.config();
 
@@ -11,13 +14,16 @@ async function startServer() {
 
   app.use(morgan('dev'));
   app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.static("public"));
 
-  // REST Routes
-  const indexRoutes = require('./routes/index');
+ 
   app.use('/', indexRoutes);
+  app.use('/exercise', exerciseRoutes);
 
   // GraphQL Routes
-  const startGraphQL = require('./graphql');
+
   await startGraphQL(app);
 
   app.listen(PORT, () => {

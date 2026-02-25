@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Node.js server!' });
-});
+ // res.json({ message: 'Welcome to the Node.js server!' });
+  res.render('./index.html');
+})
 
 let clients = [];
 let messages = [];
@@ -41,4 +42,4 @@ router.post("/add", express.json(), (req, res) => {
   res.json({ success: true });
 });
 
-module.exports = router;
+export default router;
