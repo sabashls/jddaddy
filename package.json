@@ -19,6 +19,7 @@
     "express-rate-limit": "^8.2.1",
     "graphql": "^16.12.0",
     "mongoose": "^8.5.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pdfkit": "^0.17.2"
   }
 }

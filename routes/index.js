@@ -1,5 +1,11 @@
 import express from 'express';
 const router = express.Router();
+import { fork }  from "child_process"
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
  // res.json({ message: 'Welcome to the Node.js server!' });
@@ -41,5 +47,30 @@ router.post("/add", express.json(), (req, res) => {
 
   res.json({ success: true });
 });
+
+
+router.get("/generate-pdf", (req, res) => {
+  const child = fork("./utils/pdfWorker.js");
+
+  const filePath = path.join(__dirname, "output.pdf");
+
+  child.send({
+    filePath,
+    content: "Hello from Child Process PDF!"
+  });
+
+  child.on("message", (msg) => {
+    if (msg.status === "done") {
+      res.download(filePath);
+      child.kill();
+    }
+  });
+
+  child.on("error", (err) => {
+    console.error(err);
+    res.status(500).send("PDF generation failed");
+  });
+});
+
 
 export default router;
